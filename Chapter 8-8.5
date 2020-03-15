@@ -1,0 +1,32 @@
+//凯撒密码是一种弱加密方式，它将每一个字母偏移固定的位置。偏移一个字母，指的是按着字母表 偏移，如果需要的话再从尾部跳转至首字母
+def rotate_word(word, n):
+    word2 = [0 for x in range(len(word))]
+    index = 0
+    while index < len(word):
+        if ord(word[index]) > 96 and ord(word[index]) < 123: //判断是不是小写字母
+            if ord(word[index]) + n > 122:     //判断偏移后是否会超出z的范围
+                a = ord('z') - ord(word[index])
+                b = n - a
+                word2[index] = chr(96 + b)     
+
+            else:
+                word2[index] = chr(ord(word[index]) + n)
+        elif ord(word[index]) < 91 and ord(word[index]) > 64: //判断是不是大写字母
+            if ord(word[index]) + n > 90:   //判断偏移后是否会超出Z的范围
+                a = ord("Z") - ord(word[index])
+                b = n - a
+                word2[index] = chr(64 + b)
+            else:
+                word2[index] = chr(ord(word[index]) + n)
+        elif ord(word[index]) == 32:  //判断是不是空格" "
+            word2[index] = word[index]
+        elif ord(word[index]) == 33:   //判断是不是"!"
+            word2[index] = word[index]    
+        elif ord(word[index]) == 44:    //判断是不是逗号","
+            word2[index] = word[index]    
+        elif ord(word[index]) == 46:      //判断是不是句号"."
+            word2[index] = word[index]
+
+        index = index + 1
+    str1 = "".join(word2)    //列表转换成字符串
+    print(str1)
